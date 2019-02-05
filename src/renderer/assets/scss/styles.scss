@@ -9,9 +9,8 @@ body {
 .btn {
   margin: 10px 0;
 }
-.wrapper {
-  max-width: 1170px;
-  margin: 0 auto;
+.vh100 {
+    height: calc(100vh - 20px);
 }
 .container {
   padding: 10px 25px;

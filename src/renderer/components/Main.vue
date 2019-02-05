@@ -1,14 +1,59 @@
 <template>
-    <div class="wrapper">
-        <div class="container">
-            <h1>test</h1>
+    <div class="container">
+        <div class="d-flex vh100">
+            <button class="btn btn-success m-auto" @click="uploadFile()">
+                Upload test
+            </button>
+
         </div>
     </div>
 </template>
 
 <script>
+  import CryptoJS from 'crypto-js'
+  import fs from 'fs'
+  const {dialog} = require('electron').remote
+
   export default {
-    name: 'main'
+    name: 'main',
+    data () {
+        return {
+            decryptData: ''
+        }
+    },
+    methods: {
+        uploadFile () {
+            dialog.showOpenDialog({
+                    properties: ['openFile'],
+                    filters: [
+                        {
+                            name: 'Text files',
+                            extensions: ['txt']
+                        }
+                    ]
+                },
+                (fileName) => {
+                if (fileName === undefined) {
+                    console.log('No file selected')
+                    return
+                }
+                fs.readFile(fileName[0], 'utf-8', (err, data) => {
+                    if (err) {
+                        alert('An error ocurred reading the file :' + err.message)
+                        return
+                    }
+                    this.ecnryptedData = data
+                    this.decrypt(this.ecnryptedData)
+                })
+            })
+        },
+        decrypt (data) {
+            let bytes = CryptoJS.AES.decrypt(data.toString(), '?Nd2DOKHgAKK|@$')
+            let decryptData = bytes.toString(CryptoJS.enc.Utf8)
+            this.decryptData = JSON.parse(decryptData)
+            console.log(this.decryptData)
+        }
+    }
   }
 </script>
 
