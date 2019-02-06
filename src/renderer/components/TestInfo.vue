@@ -1,8 +1,9 @@
 <template>
     <div class="container">
-        <div class="d-flex justify-content-center">
+        <div class="d-flex flex-wrap justify-content-center">            
+            <h2>{{ testInfo.name }}</h2>
             <pre>
-                {{ dataTest }}
+                {{testData}}
             </pre>
             <!-- <button class="m-auto btn btn-primary" @click="startTest()">
                 Start test
@@ -16,7 +17,8 @@
       name: 'test-info',
       data () {
           return {
-              dataTest: []
+              testInfo: {},
+              testData: {}
           }
       },
       methods: {
@@ -25,7 +27,9 @@
           }
       },
       mounted () {
-          this.dataTest = this.$store.getters.getTest
+          this.testData = JSON.parse(this.$store.getters.getTest)
+          this.testInfo = this.$store.getters.getTestInfo
+          console.log(this.testData)
       }
   }
 </script>

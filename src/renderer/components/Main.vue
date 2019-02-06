@@ -50,9 +50,13 @@
         decrypt (data) {
             let bytes = CryptoJS.AES.decrypt(data.toString(), '?Nd2DOKHgAKK|@$')
             let decryptData = bytes.toString(CryptoJS.enc.Utf8)
+            let testInformation = {}
             this.decryptData = JSON.parse(decryptData)
-            // console.log(this.decryptData)
-            this.$store.dispatch('setTest', this.decryptData)
+            testInformation.date = this.decryptData.date
+            testInformation.id = this.decryptData.id
+            testInformation.name = this.decryptData.name
+            this.$store.dispatch('setTest', this.decryptData.encrypt)
+            this.$store.dispatch('setTestInfo', testInformation)
             this.$router.push('/test-info')
         }
     }
