@@ -9,6 +9,11 @@ export default new Router({
       path: '/',
       name: 'main',
       component: require('@/components/Main').default
+    },
+    {
+      path: '/test-info',
+      name: 'test-info',
+      component: require('@/components/TestInfo').default
     }
   ]
 })
