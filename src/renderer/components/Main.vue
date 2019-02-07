@@ -1,10 +1,12 @@
 <template>
     <div class="container">
         <div class="d-flex vh100">
-            <button class="btn btn-success m-auto" @click="uploadFile()">
-                Upload test
-            </button>
-
+            <div class="m-auto text-center">
+                <h2>You need upload a test that teacher send you.</h2>
+                <button class="btn btn-success" @click="uploadFile()">
+                    Upload test
+                </button>
+            </div>
         </div>
     </div>
 </template>
@@ -55,7 +57,7 @@
             testInformation.date = this.decryptData.date
             testInformation.id = this.decryptData.id
             testInformation.name = this.decryptData.name
-            this.$store.dispatch('setTest', this.decryptData.encrypt)
+            this.$store.dispatch('setTest', JSON.parse(this.decryptData.encrypt))
             this.$store.dispatch('setTestInfo', testInformation)
             this.$router.push('/test-info')
         }

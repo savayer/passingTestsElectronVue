@@ -14,6 +14,12 @@ export default new Router({
       path: '/test-info',
       name: 'test-info',
       component: require('@/components/TestInfo').default
+    },
+    {
+      path: '/passing-test/:numberQuestion',
+      name: 'passing-test',
+      component: require('@/components/PassingTest').default,
+      props: true
     }
   ]
 })

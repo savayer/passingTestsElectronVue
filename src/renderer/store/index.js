@@ -10,7 +10,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     uploadedObjectTest: [],
-    testInformation: {}
+    testInformation: {},
+    currentQuestion: 1
   },
   mutations: {
     SET_TEST (state, data) {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     SET_TEST_INFO (state, data) {
       state.testInformation = data
+    },
+    SET_CURRENT_QUESTION (state, data) {
+      state.currentQuestion = data
     }
   },
   actions: {
@@ -26,6 +30,9 @@ export default new Vuex.Store({
     },
     setTestInfo (context, data) {
       context.commit('SET_TEST_INFO', data)
+    },
+    setCurrentQuestion (context, data) {
+      context.commit('SET_CURRENT_QUESTION', data)
     }
   },
   getters: {
@@ -34,6 +41,12 @@ export default new Vuex.Store({
     },
     getTestInfo (state) {
       return state.testInformation
+    },
+    getCurrentQuestion (state) {
+      return state.currentQuestion
+    },
+    getCurrentTestQuestion (state) {
+      return state.uploadedObjectTest[state.currentQuestion - 1]
     }
   },
   /* modules,
