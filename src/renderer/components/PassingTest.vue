@@ -51,6 +51,14 @@
         }
     },
     methods: {
+        renderData () {
+            let testData = this.$store.getters.getTest
+            this.testData = testData[this.numberQuestion - 1]         
+            this.timer = 31
+            this.interval = setInterval(() => {
+                this.timerCount()
+            }, 1000)
+        },
         timerCount () {
             this.timer--
             this.timeLeftString = `00:${this.timer < 10 ? '0' + this.timer : this.timer}`
@@ -63,13 +71,12 @@
             this.$router.push(`/passing-test/${+this.numberQuestion + 1}`)
         }
     },
+    beforeRouteUpdate (to) {
+        this.numberQuestion = to.params.numberQuestion
+        this.renderData()
+    },
     mounted () {
-        // this.testData = this.$store.getters.getCurrentTestQuestion
-        let testData = this.$store.getters.getTest
-        this.testData = testData[+this.numberQuestion - 1]
-        this.interval = setInterval(() => {
-            this.timerCount()
-        }, 1000)
+        this.renderData()
     }
   }
 </script>
