@@ -11,7 +11,8 @@ export default new Vuex.Store({
   state: {
     uploadedObjectTest: [],
     testInformation: {},
-    currentQuestion: 1
+    currentQuestion: 1,
+    result: 0
   },
   mutations: {
     SET_TEST (state, data) {
@@ -22,6 +23,9 @@ export default new Vuex.Store({
     },
     SET_CURRENT_QUESTION (state, data) {
       state.currentQuestion = data
+    },
+    INCREMENT_RESULT (state) {
+      state.result++
     }
   },
   actions: {
@@ -33,6 +37,9 @@ export default new Vuex.Store({
     },
     setCurrentQuestion (context, data) {
       context.commit('SET_CURRENT_QUESTION', data)
+    },
+    incrementResult (context) {
+      context.commit('INCREMENT_RESULT')
     }
   },
   getters: {
@@ -47,6 +54,9 @@ export default new Vuex.Store({
     },
     getCurrentTestQuestion (state) {
       return state.uploadedObjectTest[state.currentQuestion - 1]
+    },
+    getResult (state) {
+      return state.result
     }
   },
   /* modules,

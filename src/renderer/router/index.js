@@ -20,6 +20,12 @@ export default new Router({
       name: 'passing-test',
       component: require('@/components/PassingTest').default,
       props: true
+    },
+    {
+      path: '/result-test',
+      name: 'result-test',
+      component: require('@/components/ResultTest').default,
+      props: true
     }
   ]
 })

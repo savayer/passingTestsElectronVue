@@ -7,7 +7,7 @@
                     <div class="answers-radio text-right">
                         <label class="radio-container" v-for="(answer, index) in testData.answers" :key="index">
                             {{ answer.answer }}
-                            <input type="radio" :value="index+1" v-model="answerTemp">
+                            <input type="radio" :value="answer" v-model="selectedAnswer">
                             <span class="checkmark"></span>
                         </label>
                     </div>
@@ -44,7 +44,7 @@
     data () {
         return {
             testData: {},
-            answerTemp: false,
+            selectedAnswer: {},
             timer: 30,
             timeLeftString: '00:30',
             interval: ''
@@ -53,7 +53,11 @@
     methods: {
         renderData () {
             let testData = this.$store.getters.getTest
-            this.testData = testData[this.numberQuestion - 1]         
+            this.testData = testData[this.numberQuestion - 1]
+            if (!this.testData) {
+                this.$router.push('/result-test')
+                return
+            }
             this.timer = 31
             this.interval = setInterval(() => {
                 this.timerCount()
@@ -65,10 +69,14 @@
             if (this.timer === 0) this.nextQuestion()
         },
         nextQuestion () {
+            this.checkAnswer()
             clearInterval(this.interval)
             // let nextNumberQuestion = this.$store.getters.getCurrentQuestion + 1
             // this.$store.dispatch('setCurrentQuestion', nextNumberQuestion)
             this.$router.push(`/passing-test/${+this.numberQuestion + 1}`)
+        },
+        checkAnswer () {
+            if (this.selectedAnswer.right) this.$store.dispatch('incrementResult')
         }
     },
     beforeRouteUpdate (to) {

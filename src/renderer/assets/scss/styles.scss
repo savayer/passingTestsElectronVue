@@ -68,3 +68,14 @@ body {
     left: 0;
   }
 }
+
+.circle {
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+  color: #fff;
+  font-size: 6em;
+  border-radius: 50%;
+  background: #27b627;
+  display: flex;
+}
