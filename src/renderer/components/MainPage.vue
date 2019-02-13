@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <Header />
+        <top-header />
         <div class="container">
             <div class="d-flex vh-custom">
                 <div class="m-auto text-center">
@@ -21,13 +21,13 @@
 <script>
   import CryptoJS from 'crypto-js'
   import fs from 'fs'
-  import Header from './Header.vue'
+  import TopHeader from './TopHeader.vue'
   const {dialog} = require('electron').remote
 
   export default {
-    name: 'main',
+    name: 'main-page',
     components: {
-        Header
+        TopHeader
     },
     data () {
         return {

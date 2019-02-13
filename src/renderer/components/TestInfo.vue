@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <Header />
+        <top-header />
         <div class="container">
             <div class="d-flex vh-custom flex-column text-center">    
                 <div class="m-auto">
@@ -31,12 +31,12 @@
 </template>
 
 <script>
-  import Header from './Header.vue'
+  import TopHeader from './TopHeader.vue'
 
   export default {
       name: 'test-info',
       components: {
-          Header
+          TopHeader
       },
       data () {
           return {

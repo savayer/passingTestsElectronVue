@@ -1,24 +1,26 @@
 <template>
     <div class="wrapper">
-        <Header />
+        <top-header />
         <div class="area vh-custom">
             <div class="area-item answer">
                 <div class="container m-auto">
                     <h4 class="text-center"><b><!-- Answer: -->תשובה:</b></h4>
                     <div class="answers-radio text-right">
-                        <label class="radio-container" v-for="(answer, index) in testData.answers" :key="index">
-                            {{ answer.answer }}
-                            <input type="radio" :value="answer" v-model="selectedAnswer" >
-                            <span class="checkmark"></span>
-                        </label>
+                        <div v-if="show">
+                            <label class="radio-container" v-for="(answer, index) in testData.answers" :key="index">
+                                {{ answer.answer }}
+                                <input type="radio" :value="answer" v-model="selectedAnswer"  @change="nextQuestion()">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div v-else>
+                            <p>...</p>
+                        </div>
                     </div>
                     <br>
                     <div class="text-right">
-                        <button class="btn btn-primary" @click="nextQuestion()">
-                            Next question
-                        </button>
                         <span style="color: #f75733;font-style: italic;padding-right: 55px">
-                        * אנא תסמן תשובה נכונה                        
+                        * אנא תסמן תשובה נכונה
                         </span>
                     </div>
                 </div>
@@ -32,26 +34,21 @@
                     <h4>{{ testData.question }} </h4>
                 </div>
             </div>
-        </div>        
+        </div>
     </div>
 </template>
 
 <script>
-  import Header from './Header.vue'
-
+  import TopHeader from './TopHeader.vue'
   export default {
     name: 'passing-test',
     components: {
-        Header
-    },
-    props: {
-        numberQuestion: {
-            type: String,
-            required: true
-        }
+        TopHeader
     },
     data () {
         return {
+            show: true,
+            numberQuestion: 0,
             testData: {},
             selectedAnswer: {},
             timer: 30,
@@ -61,17 +58,18 @@
     },
     methods: {
         renderData () {
-            let testData = this.$store.getters.getTest
-            this.testData = testData[this.numberQuestion - 1]
+            ++this.numberQuestion
+            this.initTestData()
+            this.startTimer()
+        },
+        initTestData () {
+            this.testData = this.getTestData(this.numberQuestion - 1)
             if (!this.testData) {
-                this.$router.push('/result-test')
-                return
+                return this.$router.push('/result-test')
             }
-            this.timeLeftString = '00:30'
-            this.timer = 30
-            this.interval = setInterval(() => {
-                this.timerCount()
-            }, 1000)
+        },
+        getTestData (index) {
+            return this.$store.getters.getTest ? this.$store.getters.getTest[index] : null
         },
         timerCount () {
             this.timer--
@@ -80,23 +78,42 @@
         },
         nextQuestion () {
             this.checkAnswer()
-            clearInterval(this.interval)
-            /* let nextNumberQuestion = this.$store.getters.getCurrentQuestion + 1
-            this.$store.dispatch('setCurrentQuestion', nextNumberQuestion) */
-            this.$router.push(`/passing-test/${+this.numberQuestion + 1}`)
+            this.stopTimer()
+            this.renderData()
         },
         checkAnswer () {
-            if (this.selectedAnswer.right) this.$store.dispatch('incrementResult')
+            console.log(this.selectedAnswer.right)
+            if (this.selectedAnswer.right) {
+                this.$store.dispatch('incrementResult')
+            }
+        },
+        stopTimer () {
+            clearInterval(this.interval)
+        },
+        startTimer () {
+            this.refreshAnswersCases()
+            this.timeLeftString = '00:30'
+            this.timer = 30
+            this.interval = setInterval(() => {
+                this.timerCount()
+            }, 1000)
+        },
+        refreshAnswersCases () {
+            this.hideAnswersCases()
+            this.showAnswersCases()
+        },
+        hideAnswersCases () {
+            this.show = false
+            this.selectedAnswer = {}
+        },
+        showAnswersCases () {
+            setTimeout(() => {
+                this.show = true
+            }, 1)
         }
-    },
-    beforeRouteUpdate (to) {
-        this.selectedAnswer = {}
-        this.numberQuestion = to.params.numberQuestion
-        this.renderData()
     },
     mounted () {
         this.renderData()
     }
   }
 </script>
-
