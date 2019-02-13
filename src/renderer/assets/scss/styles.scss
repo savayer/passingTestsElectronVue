@@ -59,6 +59,10 @@ body {
 }
 @import 'radio';
 
+.vh-custom {
+  height: calc(100vh - 80px)
+}
+
 .timer-relative {
   position: relative;
   .timer {

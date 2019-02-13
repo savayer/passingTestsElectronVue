@@ -1,21 +1,22 @@
 <template>
     <div class="wrapper">
-        <div class="area vh-full">
+        <Header />
+        <div class="area vh-custom">
             <div class="area-item answer">
                 <div class="container m-auto">
                     <h4 class="text-center"><b><!-- Answer: -->תשובה:</b></h4>
                     <div class="answers-radio text-right">
                         <label class="radio-container" v-for="(answer, index) in testData.answers" :key="index">
                             {{ answer.answer }}
-                            <input type="radio" :value="answer" v-model="selectedAnswer" @change="nextQuestion()">
+                            <input type="radio" :value="answer" v-model="selectedAnswer" >
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <br>
                     <div class="text-right">
-                        <!-- <button class="btn btn-primary" @click="nextQuestion()">
+                        <button class="btn btn-primary" @click="nextQuestion()">
                             Next question
-                        </button> -->
+                        </button>
                         <span style="color: #f75733;font-style: italic;padding-right: 55px">
                         * אנא תסמן תשובה נכונה                        
                         </span>
@@ -36,8 +37,13 @@
 </template>
 
 <script>
+  import Header from './Header.vue'
+
   export default {
     name: 'passing-test',
+    components: {
+        Header
+    },
     props: {
         numberQuestion: {
             type: String,
@@ -63,7 +69,6 @@
             }
             this.timeLeftString = '00:30'
             this.timer = 30
-            this.selectedAnswer = {}
             this.interval = setInterval(() => {
                 this.timerCount()
             }, 1000)
@@ -76,8 +81,8 @@
         nextQuestion () {
             this.checkAnswer()
             clearInterval(this.interval)
-            let nextNumberQuestion = this.$store.getters.getCurrentQuestion + 1
-            this.$store.dispatch('setCurrentQuestion', nextNumberQuestion)
+            /* let nextNumberQuestion = this.$store.getters.getCurrentQuestion + 1
+            this.$store.dispatch('setCurrentQuestion', nextNumberQuestion) */
             this.$router.push(`/passing-test/${+this.numberQuestion + 1}`)
         },
         checkAnswer () {
@@ -85,6 +90,7 @@
         }
     },
     beforeRouteUpdate (to) {
+        this.selectedAnswer = {}
         this.numberQuestion = to.params.numberQuestion
         this.renderData()
     },

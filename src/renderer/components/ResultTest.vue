@@ -11,7 +11,7 @@
 
                 <div class="circle">
                     <div class="m-auto">
-                        {{ result }}/{{ countQuestion - 1 }}
+                        {{ result }}/{{ countQuestion }}
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
     },
     mounted () {
         this.result = this.$store.getters.getResult
-        this.countQuestion = this.$store.getters.getCurrentQuestion
+        this.countQuestion = this.$store.getters.getTest.length
     }
   }
 </script>

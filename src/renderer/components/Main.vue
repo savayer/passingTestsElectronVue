@@ -1,15 +1,18 @@
 <template>
-    <div class="container">
-        <div class="d-flex vh100">
-            <div class="m-auto text-center">
-                <h2>
-                    <!-- You need upload a test that teacher send you. -->
-                    אתה צריך להעלות מבחן כי המורה לשלוח לך.
-                </h2>
-                <button class="btn btn-success" @click="uploadFile()">
-                    <!-- Upload test -->
-                    טען בדיקה
-                </button>
+    <div class="wrapper">
+        <Header />
+        <div class="container">
+            <div class="d-flex vh-custom">
+                <div class="m-auto text-center">
+                    <h2>
+                        <!-- You need upload a test that teacher send you. -->
+                        אתה צריך להעלות מבחן כי המורה לשלוח לך.
+                    </h2>
+                    <button class="btn btn-success" @click="uploadFile()">
+                        <!-- Upload test -->
+                        טען בדיקה
+                    </button>
+                </div>
             </div>
         </div>
     </div>
@@ -18,10 +21,14 @@
 <script>
   import CryptoJS from 'crypto-js'
   import fs from 'fs'
+  import Header from './Header.vue'
   const {dialog} = require('electron').remote
 
   export default {
     name: 'main',
+    components: {
+        Header
+    },
     data () {
         return {
             decryptData: ''
