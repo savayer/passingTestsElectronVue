@@ -2,9 +2,13 @@
     <div class="container">
         <div class="d-flex vh100">
             <div class="m-auto text-center">
-                <h2>You need upload a test that teacher send you.</h2>
+                <h2>
+                    <!-- You need upload a test that teacher send you. -->
+                    אתה צריך להעלות מבחן כי המורה לשלוח לך.
+                </h2>
                 <button class="btn btn-success" @click="uploadFile()">
-                    Upload test
+                    <!-- Upload test -->
+                    טען בדיקה
                 </button>
             </div>
         </div>

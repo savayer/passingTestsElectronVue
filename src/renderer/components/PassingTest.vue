@@ -3,19 +3,22 @@
         <div class="area vh-full">
             <div class="area-item answer">
                 <div class="container m-auto">
-                    <h4 class="text-center"><b>Answer:</b></h4>
+                    <h4 class="text-center"><b><!-- Answer: -->תשובה:</b></h4>
                     <div class="answers-radio text-right">
                         <label class="radio-container" v-for="(answer, index) in testData.answers" :key="index">
                             {{ answer.answer }}
-                            <input type="radio" :value="answer" v-model="selectedAnswer">
+                            <input type="radio" :value="answer" v-model="selectedAnswer" @change="nextQuestion()">
                             <span class="checkmark"></span>
                         </label>
                     </div>
                     <br>
                     <div class="text-right">
-                        <button class="btn btn-primary" @click="nextQuestion()">
+                        <!-- <button class="btn btn-primary" @click="nextQuestion()">
                             Next question
-                        </button>                        
+                        </button> -->
+                        <span style="color: #f75733;font-style: italic;padding-right: 55px">
+                        * אנא תסמן תשובה נכונה                        
+                        </span>
                     </div>
                 </div>
             </div>
@@ -24,7 +27,7 @@
                     <div class="timer">
                         {{ timeLeftString }}
                     </div>
-                    <h4><b>Question {{ numberQuestion }}:</b></h4>
+                    <h4><b><!-- Question -->שאלה {{ numberQuestion }}:</b></h4>
                     <h4>{{ testData.question }} </h4>
                 </div>
             </div>
@@ -58,7 +61,9 @@
                 this.$router.push('/result-test')
                 return
             }
-            this.timer = 31
+            this.timeLeftString = '00:30'
+            this.timer = 30
+            this.selectedAnswer = {}
             this.interval = setInterval(() => {
                 this.timerCount()
             }, 1000)
@@ -71,8 +76,8 @@
         nextQuestion () {
             this.checkAnswer()
             clearInterval(this.interval)
-            // let nextNumberQuestion = this.$store.getters.getCurrentQuestion + 1
-            // this.$store.dispatch('setCurrentQuestion', nextNumberQuestion)
+            let nextNumberQuestion = this.$store.getters.getCurrentQuestion + 1
+            this.$store.dispatch('setCurrentQuestion', nextNumberQuestion)
             this.$router.push(`/passing-test/${+this.numberQuestion + 1}`)
         },
         checkAnswer () {

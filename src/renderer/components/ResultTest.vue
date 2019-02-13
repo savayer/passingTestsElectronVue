@@ -2,11 +2,16 @@
     <div class="container">
         <div class="d-flex vh100">
             <div class="m-auto">
-                <h1>Your result</h1>
+                <h3 class="text-right">
+                    <b>
+                    סיימנו, כל הכבוד ! <br>
+                    תוצאה שלך היא:
+                    </b>
+                </h3>
 
                 <div class="circle">
                     <div class="m-auto">
-                        {{ result }}
+                        {{ result }}/{{ countQuestion - 1 }}
                     </div>
                 </div>
             </div>
@@ -19,11 +24,13 @@
     name: 'result-test',
     data () {
         return {
-            result: 0
+            result: 0,
+            countQuestion: 0
         }
     },
     mounted () {
         this.result = this.$store.getters.getResult
+        this.countQuestion = this.$store.getters.getCurrentQuestion
     }
   }
 </script>
