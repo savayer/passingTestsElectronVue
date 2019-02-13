@@ -2,12 +2,9 @@
     <div class="container">
         <div class="d-flex vh100">
             <div class="m-auto">
-                <h3 class="text-right">
-                    <b>
-                    סיימנו, כל הכבוד ! <br>
-                    תוצאה שלך היא:
-                    </b>
-                </h3>
+                <h1 class="text-center">
+                    Your result
+                </h1>
 
                 <div class="circle">
                     <div class="m-auto">

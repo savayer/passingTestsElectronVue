@@ -4,7 +4,7 @@
         <div class="area vh-custom">
             <div class="area-item answer">
                 <div class="container m-auto">
-                    <h4 class="text-center"><b><!-- Answer: -->תשובה:</b></h4>
+                    <h4 class="text-center"><b>Answer:</b></h4>
                     <div class="answers-radio text-right">
                         <div v-if="show">
                             <label class="radio-container" v-for="(answer, index) in testData.answers" :key="index">
@@ -20,7 +20,7 @@
                     <br>
                     <div class="text-right">
                         <span style="color: #f75733;font-style: italic;padding-right: 55px">
-                        * אנא תסמן תשובה נכונה
+                        Please choose the correct answer
                         </span>
                     </div>
                 </div>
@@ -30,7 +30,7 @@
                     <div class="timer">
                         {{ timeLeftString }}
                     </div>
-                    <h4><b><!-- Question -->שאלה {{ numberQuestion }}:</b></h4>
+                    <h4><b>Question {{ numberQuestion }}:</b></h4>
                     <h4>{{ testData.question }} </h4>
                 </div>
             </div>

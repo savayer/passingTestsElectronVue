@@ -8,20 +8,17 @@
                         <h2>{{ testInfo.name }}</h2>
                     </div>
                     <div class="col">
-                        <h4> <!-- Count questions:  -->
-                        ספירת שאלות:
+                        <h4> Count questions:                         
                             {{ testData.length }} </h4>
                     </div>
                     <div class="col">
-                        <h4><!-- Time test passing: --> 
-                        בדיקת זמן הבדיקה:
+                        <h4>Time test passing:                         
                         {{ testData.length * 30 / 60 }}m</h4>
                     </div>
                     <div class="col">
                         <br>
                         <button class="m-auto btn btn-primary" @click="startTest()">
-                            <!-- Start test -->
-                            התחל בדיקה
+                            Start test                            
                         </button>
                     </div>
                 </div>
