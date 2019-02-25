@@ -11,7 +11,7 @@
 
                 <div class="circle">
                     <div class="m-auto">
-                        {{ result }}/{{ countQuestion }}                        
+                        {{ countResult }}
                     </div>
                 </div>
                                 <br>
@@ -40,9 +40,14 @@
             export: {}
         }
     },
+    computed: {
+        countResult () {
+            return Math.ceil(this.result / this.countQuestion * 100)
+        }
+    },
     methods: {
         exportResult () {
-            this.export['result'] = this.result + '/' + this.countQuestion
+            this.export['result'] = Math.ceil(this.result / this.countQuestion * 100)
             dialog.showSaveDialog({
                 filters: [{ name: 'Text', extensions: ['txt'] }],
                 defaultPath: `./${this.export.studentName}-${this.export.testName}.txt`

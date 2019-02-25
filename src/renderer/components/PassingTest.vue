@@ -82,7 +82,6 @@
             this.renderData()
         },
         checkAnswer () {
-            console.log(this.selectedAnswer.right)
             if (this.selectedAnswer.right) {
                 this.$store.dispatch('incrementResult')
             }
