@@ -3,14 +3,14 @@
         <!-- <div class="item power">
             <img src="../assets/power.png" class="img" @click="closeWindow()">
         </div> -->
-        <!-- <div class="item profile">
+        <div class="item profile" v-if="studentName">
             <span>
-            שלום שלמה הפטקר
+                {{ studentName }}
             </span>
             <span>
             <img src="../assets/profile.png">          
             </span>
-        </div> -->
+        </div>
         <div class="item logo ml-auto">
             <router-link to="/">
                 <img src="../assets/logo.png" class="logo" alt="">
@@ -21,7 +21,15 @@
 
 <script>
   export default {
-      name: 'top-header'
+      name: 'top-header',
+      data () {
+          return {
+              studentName: ''
+          }
+      },
+      mounted () {
+          this.studentName = this.$store.getters.getName
+      }
   }
 </script>
 

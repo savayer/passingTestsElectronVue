@@ -12,7 +12,9 @@ export default new Vuex.Store({
     uploadedObjectTest: [],
     testInformation: {},
     currentQuestion: 1,
-    result: 0
+    result: 0,
+    studentName: '',
+    passportData: ''
   },
   mutations: {
     SET_TEST (state, data) {
@@ -26,6 +28,12 @@ export default new Vuex.Store({
     },
     INCREMENT_RESULT (state) {
       state.result++
+    },
+    SET_NAME (state, data) {
+      state.studentName = data
+    },
+    SET_PASSPORT (state, data) {
+      state.passportData = data
     }
   },
   actions: {
@@ -40,6 +48,12 @@ export default new Vuex.Store({
     },
     incrementResult (context) {
       context.commit('INCREMENT_RESULT')
+    },
+    setName (context, data) {
+      context.commit('SET_NAME', data)
+    },
+    setPassport (context, data) {
+      context.commit('SET_PASSPORT', data)
     }
   },
   getters: {
@@ -57,6 +71,12 @@ export default new Vuex.Store({
     },
     getResult (state) {
       return state.result
+    },
+    getName (state) {
+      return state.studentName
+    },
+    getPassportData (state) {
+      return state.passportData
     }
   },
   /* modules,
