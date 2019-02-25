@@ -17,7 +17,7 @@
                                 <br>
                 <div class="text-center" style="margin-top: 30px;">
                     <button class="btn btn-block btn-lg btn-secondary" @click="exportResult()">
-                        <b>Export</b>
+                        <b><!-- Export -->יצוא</b>
                     </button>
                 </div>
             </div>
