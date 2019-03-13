@@ -3,7 +3,7 @@
         <top-header />
         <div class="container">
             <div class="d-flex vh-custom flex-column text-center">    
-                <div class="m-auto">
+                <div class="m-auto">                    
                     <div class="col">
                         <h2>{{ testInfo.name }}</h2>
                     </div>
@@ -14,6 +14,15 @@
                     <div class="col">
                         <h4>Time test passing:                         
                         {{ testData.length * 30 / 60 }}m</h4>
+                    </div>
+                    <div class="col">
+                        <hr>
+                        <div class="form-group">
+                            <input type="text" :class="!studentNameField ? 'error' : ''" placeholder="Name" class="form-control" name="name" v-model="studentName">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" :class="!passportDataField ? 'error' : ''" placeholder="Passport" class="form-control" v-model="passportData">
+                        </div>                        
                     </div>
                     <div class="col">
                         <br>
@@ -38,11 +47,29 @@
       data () {
           return {
               testInfo: {},
-              testData: {}
+              testData: {},
+              studentName: '',
+              studentNameField: true,
+              passportData: '',
+              passportDataField: true
           }
       },
       methods: {
           startTest () {
+              if (this.studentName === '') {
+                  this.studentNameField = false
+                  return
+              } else {
+                  this.studentNameField = true
+              }
+              if (this.passportData === '') {
+                  this.passportDataField = false
+                  return
+              } else {
+                  this.studentNameField = true
+              }
+              this.$store.dispatch('setName', this.studentName)
+              this.$store.dispatch('setPassport', this.passportData)
               this.$router.push('/passing-test/1')
           }
       },
